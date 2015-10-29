@@ -71,10 +71,14 @@ sub write_repo_files
     {
         my $filename = path($file->name);
         my $abs_filename = $filename->is_relative
-            ? path($self->repo_root)->child($file->name)
+            ? path($self->repo_root)->child($file->name)->stringify
             : $file->name;
 
-        unlink $abs_filename if -e $abs_filename and $self->allow_overwrite;
+        if (-e $abs_filename and $self->allow_overwrite)
+        {
+            $self->log_debug([ 'removing pre-existing %s', $abs_filename ]);
+            unlink $abs_filename ;
+        }
         $self->log_fatal([ '%s already exists (allow_overwrite = 0)', $abs_filename ]) if -e $abs_filename;
 
         # sadly, _write_out_file does $build_root->subdir without casting first
