@@ -80,7 +80,8 @@ sub write_repo_files
         # sadly, _write_out_file does $build_root->subdir without casting first
         my $root = Path::Class::dir($filename->is_relative ? $self->repo_root : '');
 
-        $self->log_debug([ 'writing out %s', $file->name ]);
+        $self->log_debug([ 'writing out %s%s', $file->name,
+                $filename->is_relative ? ' to ' . $self->repo_root : '' ]);
         $self->zilla->_write_out_file($file, $root);
     }
 }

@@ -76,6 +76,14 @@ cmp_deeply(
 )
 or diag 'got distmeta: ', explain $tzil->distmeta;
 
+cmp_deeply(
+    $tzil->log_messages,
+    supersetof(
+        re(qr{\Q[=MyPlugin] writing out data/my_file.txt to $source_dir\E}),
+    ),
+    'got debugging messages',
+);
+
 diag 'got log messages: ', explain $tzil->log_messages
     if not Test::Builder->new->is_passing;
 
