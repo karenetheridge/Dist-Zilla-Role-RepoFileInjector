@@ -23,7 +23,7 @@ has repo_root => (
 
 has allow_overwrite => (
     is => 'ro', isa => Bool,
-    default => 0,
+    default => 1,
 );
 
 has _repo_files => (
@@ -119,7 +119,7 @@ A boolean indicating whether it is permissible for the file to already exist
 (whereupon it is overwritten).  When false, a fatal exception is thrown when
 the file already exists.
 
-Defaults to false.
+Defaults to true.
 
 =head1 SEE ALSO
 
