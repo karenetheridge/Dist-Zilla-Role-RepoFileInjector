@@ -13,6 +13,7 @@ use MooseX::Types qw(enum role_type);
 use MooseX::Types::Moose qw(ArrayRef Str Bool);
 use Path::Tiny;
 use Cwd ();
+use namespace::clean;
 
 has repo_root => (
     is => 'ro', isa => Str,
