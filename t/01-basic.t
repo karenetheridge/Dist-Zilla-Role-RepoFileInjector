@@ -63,6 +63,8 @@ cmp_deeply(
                 config => {
                     'Dist::Zilla::Role::RepoFileInjector' => {
                         version => Dist::Zilla::Role::RepoFileInjector->VERSION,
+                        allow_overwrite => 1,
+                        repo_root => '.',
                     },
                 },
                 name => '=MyPlugin',

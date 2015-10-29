@@ -17,6 +17,7 @@ use namespace::clean;
 
 has repo_root => (
     is => 'ro', isa => Str,
+    predicate => '_has_repo_root',
     lazy => 1,
     default => sub { Cwd::getcwd() },
 );
@@ -44,6 +45,8 @@ around dump_config => sub
 
     $config->{+__PACKAGE__} = {
         version => $VERSION,
+        allow_overwrite => ( $self->allow_overwrite ? 1 : 0 ),
+        repo_root => ( $self->_has_repo_root ? $self->repo_root : '.' ),
     };
     return $config;
 };
