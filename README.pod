@@ -1,28 +1,92 @@
 =pod
 
+=encoding UTF-8
+
+=head1 NAME
+
+Dist::Zilla::Role::RepoFileInjector - Create files outside the build directory
+
+=head1 VERSION
+
+version 0.001
+
 =head1 SYNOPSIS
 
-    use Dist::Zilla::Role::RepoFileInjector;
-
-    ...
+In your F<dist.ini>:
 
 =head1 DESCRIPTION
 
-...
+This role is to be consumed by any plugin that plans to create files outside
+the distribution.
 
-=head1 FUNCTIONS/METHODS
+=head1 ATTRIBUTES
 
-=head2 C<foo>
+=head2 repo_root
 
-...
+A L<Path::Tiny> directory indicating the base directory where the file(s) are
+written, when relative paths are provided. Defaults to the current working directory.
 
-=head1 ACKNOWLEDGEMENTS
+=head2 allow_overwrite
 
-...
+A boolean indicating whether it is permissible for the file to already exist
+(whereupon it is overwritten).  When false, a fatal exception is thrown when
+the file already exists.
+
+Defaults to true.
+
+=head1 METHODS
+
+=head2 add_repo_file
+
+    $plugin->add_repo_file($dzil_file);
+
+Registers a file object to be written to disk.
+If the path is not absolute, it is treated as relative to C<repo_root>.
+The file should consume the L<Dist::Zilla::Role::File> role.
+
+=head2 write_repo_files
+
+    $plugin->write_repo_files;
+
+Writes out all files registered previously with C<add_repo_file>. Your plugin
+may choose to do this during either the C<AfterBuild> or C<AfterRelease> phase.
+
+=head2 _repo_files
+
+Returns the list of files added via C<add_repo_file>.
 
 =head1 SEE ALSO
 
-=for :list
-* L<foo>
+=over 4
+
+=item *
+
+L<Dist::Zilla::Role::FileInjector>
+
+=back
+
+=head1 SUPPORT
+
+Bugs may be submitted through L<the RT bug tracker|https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Role-RepoFileInjector>
+(or L<bug-Dist-Zilla-Role-RepoFileInjector@rt.cpan.org|mailto:bug-Dist-Zilla-Role-RepoFileInjector@rt.cpan.org>).
+
+There is also a mailing list available for users of this distribution, at
+L<http://dzil.org/#mailing-list>.
+
+There is also an irc channel available for users of this distribution, at
+irc://irc.perl.org/#distzilla.
+
+I am also usually active on irc, as 'ether' at C<irc.perl.org>.
+
+=head1 AUTHOR
+
+Karen Etheridge <ether@cpan.org>
+
+=head1 COPYRIGHT AND LICENCE
+
+This software is copyright (c) 2015 by Karen Etheridge.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut
