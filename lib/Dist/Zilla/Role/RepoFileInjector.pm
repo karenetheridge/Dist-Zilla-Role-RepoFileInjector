@@ -103,9 +103,16 @@ the distribution.
 
     $plugin->add_repo_file($dzil_file);
 
-Registers a file object to be written to disk during the C<AfterBuild> phase.
+Registers a file object to be written to disk.
 If the path is not absolute, it is treated as relative to C<repo_root>.
 The file should consume the L<Dist::Zilla::Role::File> role.
+
+=method write_repo_files
+
+    $plugin->write_repo_files;
+
+Writes out all files registered previously with C<add_repo_file>. Your plugin
+may choose to do this during either the C<AfterBuild> or C<AfterRelease> phase.
 
 =method _repo_files
 
