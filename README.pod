@@ -8,11 +8,23 @@ Dist::Zilla::Role::RepoFileInjector - Create files outside the build directory
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 SYNOPSIS
 
-In your F<dist.ini>:
+    package Dist::Zilla::Plugin::MyPlugin;
+    use Moose;
+    with 'Dist::Zilla::Role::RepoFileInjector';
+
+    sub some_method {
+        ...
+        $self->add_repo_file(Dist::Zilla::File::InMemory->new(...));
+    }
+
+    sub some_other_method {
+        ...
+        $self->write_repo_files;
+    }
 
 =head1 DESCRIPTION
 
@@ -23,8 +35,8 @@ the distribution.
 
 =head2 repo_root
 
-A L<Path::Tiny> directory indicating the base directory where the file(s) are
-written, when relative paths are provided. Defaults to the current working directory.
+A string indicating the base directory where the file(s) are written, when
+relative paths are provided. Defaults to the current working directory.
 
 =head2 allow_overwrite
 
@@ -49,7 +61,14 @@ The file should consume the L<Dist::Zilla::Role::File> role.
     $plugin->write_repo_files;
 
 Writes out all files registered previously with C<add_repo_file>. Your plugin
-may choose to do this during either the C<AfterBuild> or C<AfterRelease> phase.
+should normally do this during either the C<AfterBuild> or C<AfterRelease>
+phase, e.g.:
+
+    sub after_build
+    {
+        my $self = shift;
+        $self->write_repo_files;
+    }
 
 =head2 _repo_files
 
