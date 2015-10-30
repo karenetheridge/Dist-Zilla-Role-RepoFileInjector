@@ -1,6 +1,7 @@
 Revision history for Dist-Zilla-Role-RepoFileInjector
 
 {{$NEXT}}
+          - improved documentation
 
 0.001     2015-10-29 03:32:19Z
           - Initial release.

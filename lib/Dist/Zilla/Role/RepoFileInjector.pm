@@ -97,7 +97,19 @@ __END__
 
 =head1 SYNOPSIS
 
-In your F<dist.ini>:
+    package Dist::Zilla::Plugin::MyPlugin;
+    use Moose;
+    with 'Dist::Zilla::Role::RepoFileInjector';
+
+    sub some_method {
+        ...
+        $self->add_repo_file(Dist::Zilla::File::InMemory->new(...));
+    }
+
+    sub some_other_method {
+        ...
+        $self->write_repo_files;
+    }
 
 =head1 DESCRIPTION
 
@@ -117,7 +129,14 @@ The file should consume the L<Dist::Zilla::Role::File> role.
     $plugin->write_repo_files;
 
 Writes out all files registered previously with C<add_repo_file>. Your plugin
-may choose to do this during either the C<AfterBuild> or C<AfterRelease> phase.
+should normally do this during either the C<AfterBuild> or C<AfterRelease>
+phase, e.g.:
+
+    sub after_build
+    {
+        my $self = shift;
+        $self->write_repo_files;
+    }
 
 =method _repo_files
 
@@ -125,8 +144,8 @@ Returns the list of files added via C<add_repo_file>.
 
 =attr repo_root
 
-A L<Path::Tiny> directory indicating the base directory where the file(s) are
-written, when relative paths are provided. Defaults to the current working directory.
+A string indicating the base directory where the file(s) are written, when
+relative paths are provided. Defaults to the current working directory.
 
 =attr allow_overwrite
 
