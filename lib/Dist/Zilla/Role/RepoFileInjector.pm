@@ -19,7 +19,7 @@ has repo_root => (
     is => 'ro', isa => Str,
     predicate => '_has_repo_root',
     lazy => 1,
-    default => sub { Cwd::getcwd() },
+    default => sub { path(Cwd::getcwd())->stringify },
 );
 
 has allow_overwrite => (
