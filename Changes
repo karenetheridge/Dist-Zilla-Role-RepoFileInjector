@@ -1,6 +1,6 @@
 Revision history for Dist-Zilla-Role-RepoFileInjector
 
-{{$NEXT}}
+0.003     2015-11-07 08:39:24Z
           - normalize repository root directory in tests, to allow for
             consistent comparisons on MSWin32
 
