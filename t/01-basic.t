@@ -44,11 +44,11 @@ my $tzil = Builder->from_config(
 $tzil->chrome->logger->set_debug(1);
 $tzil->build;
 
-my $build_dir = $tzil->tempdir->subdir('build');
+my $build_dir = path($tzil->tempdir)->child('build');
 my $nonfile = path($build_dir, 'data', 'my_file.txt');
 ok(!-e $nonfile, 'file not created in build (' . $build_dir . ')');
 
-my $source_dir = $tzil->tempdir->subdir('source');
+my $source_dir = path($tzil->tempdir)->child('source');
 my $file = path($source_dir, 'data', 'my_file.txt');
 ok(-e $file, 'file created in source (' . $source_dir . ')')
  and

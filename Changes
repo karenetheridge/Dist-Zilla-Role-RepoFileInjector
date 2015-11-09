@@ -1,6 +1,8 @@
 Revision history for Dist-Zilla-Role-RepoFileInjector
 
 {{$NEXT}}
+          - normalize remaining paths in tests, to resolve remaining issues
+            with testing on MSWin32
 
 0.003     2015-11-07 08:39:24Z
           - normalize repository root directory in tests, to allow for
