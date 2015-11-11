@@ -1,6 +1,8 @@
 Revision history for Dist-Zilla-Role-RepoFileInjector
 
 {{$NEXT}}
+          - fall back to an alternative mechanism when a method is not
+            available (Dist::Zilla older than 5.000)
 
 0.004     2015-11-09 04:39:06Z
           - normalize remaining paths in tests, to resolve remaining issues
