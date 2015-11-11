@@ -5,7 +5,7 @@ package Dist::Zilla::Role::RepoFileInjector;
 # KEYWORDS: plugin distribution generate create file repository
 # vim: set ts=8 sts=4 sw=4 tw=115 et :
 
-our $VERSION = '0.005';
+our $VERSION = '0.006';
 
 use Moose::Role;
 
