@@ -108,6 +108,12 @@ __END__
 
 =head1 SYNOPSIS
 
+In your F<dist.ini>:
+
+    [MyPlugin]
+
+And in your plugin:
+
     package Dist::Zilla::Plugin::MyPlugin;
     use Moose;
     with 'Dist::Zilla::Role::RepoFileInjector';
@@ -134,6 +140,7 @@ the distribution.
 Registers a file object to be written to disk.
 If the path is not absolute, it is treated as relative to C<repo_root>.
 The file should consume the L<Dist::Zilla::Role::File> role.
+Normally the consuming plugin would call this in the C<FileGatherer> phase.
 
 =method write_repo_files
 
@@ -152,11 +159,14 @@ phase, e.g.:
 =method _repo_files
 
 Returns the list of files added via C<add_repo_file>.
+Normally the consuming plugin would call this in the C<FileMunger> phase.
 
 =attr repo_root
 
 A string indicating the base directory where the file(s) are written, when
 relative paths are provided. Defaults to the current working directory.
+
+This attribute is available as an option of your plugin in F<dist.ini>.
 
 =attr allow_overwrite
 
@@ -165,6 +175,8 @@ A boolean indicating whether it is permissible for the file to already exist
 the file already exists.
 
 Defaults to true.
+
+This attribute is available as an option of your plugin in F<dist.ini>.
 
 =head1 SEE ALSO
 
