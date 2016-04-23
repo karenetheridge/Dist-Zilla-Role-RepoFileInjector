@@ -8,9 +8,15 @@ Dist::Zilla::Role::RepoFileInjector - Create files outside the build directory
 
 =head1 VERSION
 
-version 0.005
+version 0.006
 
 =head1 SYNOPSIS
+
+In your F<dist.ini>:
+
+    [MyPlugin]
+
+And in your plugin:
 
     package Dist::Zilla::Plugin::MyPlugin;
     use Moose;
@@ -38,6 +44,8 @@ the distribution.
 A string indicating the base directory where the file(s) are written, when
 relative paths are provided. Defaults to the current working directory.
 
+This attribute is available as an option of your plugin in F<dist.ini>.
+
 =head2 allow_overwrite
 
 A boolean indicating whether it is permissible for the file to already exist
@@ -45,6 +53,8 @@ A boolean indicating whether it is permissible for the file to already exist
 the file already exists.
 
 Defaults to true.
+
+This attribute is available as an option of your plugin in F<dist.ini>.
 
 =head1 METHODS
 
@@ -55,6 +65,7 @@ Defaults to true.
 Registers a file object to be written to disk.
 If the path is not absolute, it is treated as relative to C<repo_root>.
 The file should consume the L<Dist::Zilla::Role::File> role.
+Normally the consuming plugin would call this in the C<FileGatherer> phase.
 
 =head2 write_repo_files
 
@@ -73,6 +84,7 @@ phase, e.g.:
 =head2 _repo_files
 
 Returns the list of files added via C<add_repo_file>.
+Normally the consuming plugin would call this in the C<FileMunger> phase.
 
 =head1 SEE ALSO
 
@@ -93,7 +105,7 @@ There is also a mailing list available for users of this distribution, at
 L<http://dzil.org/#mailing-list>.
 
 There is also an irc channel available for users of this distribution, at
-irc://irc.perl.org/#distzilla.
+L<C<#distzilla> on C<irc.perl.org>|irc://irc.perl.org/#distzilla>.
 
 I am also usually active on irc, as 'ether' at C<irc.perl.org>.
 
