@@ -11,7 +11,7 @@ use Moose::Role;
 
 use MooseX::Types qw(enum role_type);
 use MooseX::Types::Moose qw(ArrayRef Str Bool);
-use Path::Tiny;
+use Path::Tiny 0.022;
 use Cwd ();
 use namespace::clean;
 
@@ -92,12 +92,14 @@ sub write_repo_files
         }
         $self->log_fatal([ '%s already exists (allow_overwrite = 0)', $abs_filename ]) if -e $abs_filename;
 
-        # sadly, _write_out_file does $build_root->subdir without casting first
-        my $root = Path::Class::dir($filename->is_relative ? $self->repo_root : '');
-
         $self->log_debug([ 'writing out %s%s', $file->name,
-                $filename->is_relative ? ' to ' . $self->repo_root : '' ]);
-        $self->zilla->_write_out_file($file, $root);
+            $filename->is_relative ? ' to ' . $self->repo_root : '' ]);
+
+        Carp::croak("attempted to write $filename multiple times") if -e $filename;
+        $filename->touchpath;
+
+        $filename->spew_raw($file->encoded_content);
+        chmod $file->mode, "$filename" or die "couldn't chmod $filename: $!";
     }
 }
 
