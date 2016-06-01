@@ -1,6 +1,6 @@
 Revision history for Dist-Zilla-Role-RepoFileInjector
 
-{{$NEXT}}
+0.007     2016-06-01 03:58:33Z
           - backwards compatibility fixes for Dist::Zilla 4.x
 
 0.006     2016-04-23 16:21:10Z
