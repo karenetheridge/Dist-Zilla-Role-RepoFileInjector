@@ -98,7 +98,10 @@ sub write_repo_files
         Carp::croak("attempted to write $filename multiple times") if -e $filename;
         $filename->touchpath;
 
-        $filename->spew_raw($file->encoded_content);
+        # handle dzil v4 files by assuming no (or latin1) encoding
+        my $encoded_content = $file->can('encoded_content') ? $file->encoded_content : $file->content;
+
+        $filename->spew_raw($encoded_content);
         chmod $file->mode, "$filename" or die "couldn't chmod $filename: $!";
     }
 }

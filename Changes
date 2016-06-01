@@ -1,6 +1,7 @@
 Revision history for Dist-Zilla-Role-RepoFileInjector
 
 {{$NEXT}}
+          - backwards compatibility fixes for Dist::Zilla 4.x
 
 0.006     2016-04-23 16:21:10Z
           - remove implicit use of Path::Class which broke under Dist::Zilla
