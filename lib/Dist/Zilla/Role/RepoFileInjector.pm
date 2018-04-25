@@ -1,9 +1,9 @@
 use strict;
 use warnings;
 package Dist::Zilla::Role::RepoFileInjector;
+# vim: set ts=8 sts=4 sw=4 tw=115 et :
 # ABSTRACT: Create files outside the build directory
 # KEYWORDS: plugin distribution generate create file repository
-# vim: set ts=8 sts=4 sw=4 tw=115 et :
 
 our $VERSION = '0.008';
 
