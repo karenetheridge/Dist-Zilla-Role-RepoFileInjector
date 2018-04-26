@@ -12,14 +12,13 @@ use Moose::Role;
 use MooseX::Types qw(enum role_type);
 use MooseX::Types::Moose qw(ArrayRef Str Bool);
 use Path::Tiny 0.022;
-use Cwd ();
 use namespace::clean;
 
 has repo_root => (
     is => 'ro', isa => Str,
     predicate => '_has_repo_root',
     lazy => 1,
-    default => sub { path(Cwd::getcwd())->stringify },
+    default => sub { shift->zilla->root->stringify },
 );
 
 has allow_overwrite => (
@@ -170,7 +169,7 @@ Normally the consuming plugin would call this in the C<FileMunger> phase.
 =attr repo_root
 
 A string indicating the base directory where the file(s) are written, when
-relative paths are provided. Defaults to the current working directory.
+relative paths are provided. Defaults to L<Dist::Zilla/root>.
 
 This attribute is available as an option of your plugin in F<dist.ini>.
 
