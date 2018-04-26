@@ -96,14 +96,14 @@ sub write_repo_files
         $self->log_debug([ 'writing out %s%s', $file->name,
             $filename->is_relative ? ' to ' . $self->repo_root : '' ]);
 
-        Carp::croak("attempted to write $filename multiple times") if $filename->exists;
-        $filename->touchpath;
+        Carp::croak("attempted to write $filename multiple times") if $abs_filename->exists;
+        $abs_filename->touchpath;
 
         # handle dzil v4 files by assuming no (or latin1) encoding
         my $encoded_content = $file->can('encoded_content') ? $file->encoded_content : $file->content;
 
-        $filename->spew_raw($encoded_content);
-        chmod $file->mode, "$filename" or die "couldn't chmod $filename: $!";
+        $abs_filename->spew_raw($encoded_content);
+        chmod $file->mode, "$abs_filename" or die "couldn't chmod $abs_filename: $!";
     }
 }
 

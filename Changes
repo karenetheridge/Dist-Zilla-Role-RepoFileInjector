@@ -1,6 +1,7 @@
 Revision history for Dist-Zilla-Role-RepoFileInjector
 
 {{$NEXT}}
+          - fix handling of non-default repo_root option
 
 0.007     2016-06-01 03:58:33Z
           - backwards compatibility fixes for Dist::Zilla 4.x
