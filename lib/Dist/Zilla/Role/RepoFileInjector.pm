@@ -95,7 +95,7 @@ sub write_repo_files
         $self->log_debug([ 'writing out %s%s', $file->name,
             $filename->is_relative ? ' to ' . $self->repo_root : '' ]);
 
-        Carp::croak("attempted to write $filename multiple times") if -e $filename;
+        Carp::croak("attempted to write $filename multiple times") if $filename->exists;
         $filename->touchpath;
 
         # handle dzil v4 files by assuming no (or latin1) encoding
