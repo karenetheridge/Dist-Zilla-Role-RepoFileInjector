@@ -5,7 +5,7 @@ package Dist::Zilla::Role::RepoFileInjector;
 # ABSTRACT: Create files outside the build directory
 # KEYWORDS: plugin distribution generate create file repository
 
-our $VERSION = '0.008';
+our $VERSION = '0.009';
 
 use Moose::Role;
 
