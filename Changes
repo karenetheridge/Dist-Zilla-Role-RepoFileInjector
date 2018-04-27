@@ -1,6 +1,6 @@
 Revision history for Dist-Zilla-Role-RepoFileInjector
 
-{{$NEXT}}
+0.008     2018-04-27 00:14:42Z
           - fix handling of non-default repo_root option
           - repo_root now defaults to $zilla->root, rather than the current
             directory, to work with Dist::Zilla 7.000

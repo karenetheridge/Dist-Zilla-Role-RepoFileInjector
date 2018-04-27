@@ -8,7 +8,7 @@ Dist::Zilla::Role::RepoFileInjector - Create files outside the build directory
 
 =head1 VERSION
 
-version 0.007
+version 0.008
 
 =head1 SYNOPSIS
 
@@ -42,7 +42,7 @@ the distribution.
 =head2 repo_root
 
 A string indicating the base directory where the file(s) are written, when
-relative paths are provided. Defaults to the current working directory.
+relative paths are provided. Defaults to L<Dist::Zilla/root>.
 
 This attribute is available as an option of your plugin in F<dist.ini>.
 
