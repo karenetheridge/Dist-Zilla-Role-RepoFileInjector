@@ -45,7 +45,7 @@ around dump_config => sub
     $config->{+__PACKAGE__} = {
         version => $VERSION,
         allow_overwrite => ( $self->allow_overwrite ? 1 : 0 ),
-        repo_root => ( $self->_has_repo_root ? $self->repo_root : '.' ),
+        repo_root => ( $self->_has_repo_root ? path($self->repo_root)->stringify : '.' ),
     };
     return $config;
 };
@@ -93,7 +93,7 @@ sub write_repo_files
             if $abs_filename->exists;
 
         $self->log_debug([ 'writing out %s%s', $file->name,
-            $filename->is_relative ? ' to ' . $self->repo_root : '' ]);
+            $filename->is_relative ? ' to ' . path($self->repo_root)->stringify : '' ]);
 
         Carp::croak("attempted to write $filename multiple times") if $abs_filename->exists;
         $abs_filename->touchpath;
