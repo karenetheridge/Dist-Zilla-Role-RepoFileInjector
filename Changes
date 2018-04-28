@@ -1,5 +1,7 @@
 Revision history for Dist-Zilla-Role-RepoFileInjector
 
+{{$NEXT}}
+
 0.009     2018-04-28 18:42:49Z
           - fix test failures on MSWin32 and Dist::Zilla 5.x by normalizing
             paths before logging them
